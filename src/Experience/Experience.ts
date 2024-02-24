@@ -12,6 +12,10 @@ import sources from './sources.ts'
 
 let instance: Experience;
 
+declare global { 
+    interface Window { experience: Experience;}
+}
+
 export default class Experience
 {
     canvas: HTMLCanvasElement
