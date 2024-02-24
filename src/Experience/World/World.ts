@@ -39,8 +39,13 @@ export default class World
                 this.planets[planet].add(box.mesh)
                 
                 if(planet != "sun"){
+                    
+                    const scaledSemiMajorAxis = Math.abs(Math.log(SCALED_PLANET_DATA[planet].semiMajorAxis))
+
+                    console.log(planet,scaledSemiMajorAxis)
+
                     const orbit = new EllipticalOrbitLine(
-                        PLANET_DATA[planet].semiMajorAxis, 
+                        scaledSemiMajorAxis, 
                         PLANET_DATA[planet].eccentricity,
                         0xffffff)
 

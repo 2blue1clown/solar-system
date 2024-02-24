@@ -121,14 +121,14 @@ export const PLANET_DATA = {
         inclinationOfOrbitToEcliptic:degToRad( 17.15),
         inclinationOfEquatorToOrbit:degToRad( 122.5)
     }
-}
+} as {[key in Planet]: PlanetData}
 
 
 //do the same but to another object instead
 export const SCALED_PLANET_DATA = Object.keys(PLANET_DATA).reduce((acc, planet) => {
     acc[planet] = {
         ...PLANET_DATA[planet as Planet],
-        radius: Math.log(PLANET_DATA[planet as Planet].radius) * 0.01
+        radius: Math.log(PLANET_DATA[planet as Planet].radius) * 0.01,
     }
     return acc
 }, {} as {[key in Planet]: PlanetData})
