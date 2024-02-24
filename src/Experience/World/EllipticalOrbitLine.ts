@@ -1,8 +1,9 @@
 
 
 
-import { AdditiveBlending, BufferGeometry, EllipseCurve, LineBasicMaterial, Mesh, MeshBasicMaterial, RingGeometry } from "three";
+import { BufferGeometry, DoubleSide, EllipseCurve, LineBasicMaterial, Mesh } from "three";
 import Experience from "../Experience";
+
 
 export default class EllipticalOrbitLine{
     experience:Experience
@@ -40,15 +41,13 @@ export default class EllipticalOrbitLine{
     width:number
 
 
-    constructor(semiMajorAxis:number, eccentricity:number,inclination:number, color:number = 0xffffff){
+    constructor(semiMajorAxis:number, eccentricity:number, color:number = 0xffffff){
         
-
         this.semiMajorAxis = semiMajorAxis
         this.eccentricity = eccentricity
-        this.inclination = inclination
-
+        
         this.color = color
-
+        
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.setGeometry()
@@ -58,27 +57,22 @@ export default class EllipticalOrbitLine{
 
     setGeometry(){
 
+        this.curve =  new EllipseCurve(this.fociDistance/2, 0, this.semiMajorAxis, this.semiMinorAxis, 0,2*Math.PI, false)
 
-        this.curve =  new EllipseCurve(this.fociDistance/2, 0, this.semiMajorAxis, this.semiMinorAxis, 0, 2 * Math.PI, false,)
-        
-        const points = this.curve.getPoints( 100 );
+        const points = this.curve.getPoints( 200 );
         this.geometry = new BufferGeometry().setFromPoints( points );
     }
 
     setMaterial(){
         this.material = new LineBasicMaterial({
             color:this.color,
-            // vertexColors: true,
-            blending:AdditiveBlending,
-            // transparent:true,
-            linejoin: 'round',
+            side:DoubleSide
 
         })
     }
 
     setMesh(){
         this.mesh = new Mesh(this.geometry, this.material)
-        // this.mesh.rotation.x = - Math.PI * 0.5
     }
 
 
