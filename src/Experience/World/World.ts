@@ -27,6 +27,10 @@ export default class World
             this.floor = new Floor()
             this.environment = new Environment()
             this.box = new PlaceholderBox()
+
+            this.box.position = {x: 0, y: 0.6, z: 0}
+
+            this.scene.add(this.box.mesh)
         })
     }
 
