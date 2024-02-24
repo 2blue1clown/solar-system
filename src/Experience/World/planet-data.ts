@@ -1,6 +1,7 @@
 // source https://web.njit.edu/~gary/202/Lecture7.html
 
 export enum Planet {
+    Sun = 'sun',
     Mercury = 'mercury',
     Venus = 'venus',
     Earth = 'earth',
@@ -28,12 +29,18 @@ export interface PlanetData {
     radius: number,
 }
 
-
 export const PLANET_DATA = {
+    [Planet.Sun]:{
+        color: 0xFFFF00,
+        distance: 0,
+        radius: 696000
+
+    },
+
     [Planet.Mercury]:{
         color: 0xCC5500,
         distance: 0.39,
-        radius: 2439
+        radius: 2439,
     },
     [Planet.Venus]:{
         color: 0xc0c0c0,
@@ -76,3 +83,13 @@ export const PLANET_DATA = {
         radius: 1140
     }
 }
+
+
+//do the same but to another object instead
+export const SCALED_PLANET_DATA = Object.keys(PLANET_DATA).reduce((acc, planet) => {
+    acc[planet] = {
+        ...PLANET_DATA[planet as Planet],
+        radius: Math.log(PLANET_DATA[planet as Planet].radius) * 0.01
+    }
+    return acc
+}, {} as {[key in Planet]: PlanetData})
