@@ -5,18 +5,8 @@ import Environment from './Environment.js'
 import Floor from './Floor.js'
 import PlaceholderBox from './PlaceholderBox.ts'
 import OrbitLine from './OrbitLine.ts'
+import { Planet } from './planet-data.ts'
 
-export enum Planet {
-    Mercury = 'mercury',
-    Venus = 'venus',
-    Earth = 'earth',
-    Mars = 'mars',
-    Jupiter = 'jupiter',
-    Saturn = 'saturn',
-    Uranus = 'uranus',
-    Neptune = 'neptune',
-    Pluto = 'pluto',
-}
 
 export default class World
 {
