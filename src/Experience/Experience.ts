@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+
 
 import Debug from './Utils/Debug.ts'
 import Sizes from './Utils/Sizes.ts'
@@ -9,6 +9,7 @@ import World from './World/World.js'
 import Resources from './Utils/Resources.ts'
 
 import sources from './sources.ts'
+import { Mesh, Scene } from 'three'
 
 let instance: Experience;
 
@@ -22,7 +23,7 @@ export default class Experience
     debug: Debug
     sizes: Sizes
     time: Time
-    scene: THREE.Scene
+    scene: Scene
     resources: Resources
     camera: Camera
     renderer: Renderer
@@ -52,7 +53,7 @@ export default class Experience
         this.debug = new Debug()
         this.sizes = new Sizes()
         this.time = new Time()
-        this.scene = new THREE.Scene()
+        this.scene = new Scene()
         this.resources = new Resources(sources)
         this.camera = new Camera(this)
         this.renderer = new Renderer(this)
@@ -93,7 +94,7 @@ export default class Experience
         this.scene.traverse((child) =>
         {
             // Test if it's a mesh
-            if(child instanceof THREE.Mesh)
+            if(child instanceof Mesh)
             {
                 child.geometry.dispose()
 

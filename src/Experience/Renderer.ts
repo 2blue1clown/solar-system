@@ -1,17 +1,17 @@
-import * as THREE from 'three'
 import Experience from './Experience.js'
 import Sizes from './Utils/Sizes.ts'
-import Camera from './Camera.js'
+import Camera from './Camera.ts'
+import { CineonToneMapping, PCFSoftShadowMap, Scene, WebGLRenderer } from 'three'
 
 export default class Renderer
 {
     experience: Experience
     canvas: HTMLCanvasElement
     sizes: Sizes
-    scene: THREE.Scene
+    scene: Scene
     camera: Camera
 
-    instance: THREE.WebGLRenderer
+    instance: WebGLRenderer
     constructor(experience:Experience)
     {
         this.experience = experience
@@ -25,14 +25,14 @@ export default class Renderer
 
     setInstance()
     {
-        this.instance = new THREE.WebGLRenderer({
+        this.instance = new WebGLRenderer({
             canvas: this.canvas,
             antialias: true
         })
-        this.instance.toneMapping = THREE.CineonToneMapping
+        this.instance.toneMapping = CineonToneMapping
         this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
-        this.instance.shadowMap.type = THREE.PCFSoftShadowMap
+        this.instance.shadowMap.type = PCFSoftShadowMap
         this.instance.setClearColor('#211d20')
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
