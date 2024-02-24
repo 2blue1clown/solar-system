@@ -1,8 +1,22 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import Resources from '../Utils/Resources.js'
+import GUI from 'lil-gui'
 
 export default class Environment
 {
+    experience: Experience
+    scene: THREE.Scene
+    resources: Resources
+    debug: Experience['debug']
+    debugFolder: GUI
+    sunLight: THREE.DirectionalLight
+    environmentMap: {
+        intensity: number
+        texture: THREE.Texture
+        updateMaterials: () => void
+    }
+
     constructor()
     {
         this.experience = new Experience()
@@ -65,9 +79,9 @@ export default class Environment
 
     setEnvironmentMap()
     {
-        this.environmentMap = {}
+        this.environmentMap = {} as Environment['environmentMap']
         this.environmentMap.intensity = 0.4
-        this.environmentMap.texture = this.resources.items.environmentMapTexture
+        this.environmentMap.texture = this.resources.items.environmentMapTexture as THREE.Texture
         this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace
         
         this.scene.environment = this.environmentMap.texture
