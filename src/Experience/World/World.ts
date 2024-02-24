@@ -7,6 +7,7 @@ import PlaceholderBox from './PlaceholderBox.ts'
 import OrbitLine from './OrbitLine.ts'
 import { PLANET_DATA, SCALED_PLANET_DATA } from './planet-data.ts'
 import { Planet } from './planet-data.ts'
+import EllipticalOrbitLine from './EllipticalOrbitLine.ts'
 
 export default class World
 {
@@ -47,7 +48,8 @@ export default class World
                 this.planets[planet].mesh.scale.set(SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius)
 
                 if(planet != "sun"){
-                    this.orbits[planet] = new OrbitLine(PLANET_DATA[planet].distance,0.01,0xffffff)
+                    // this.orbits[planet] = new OrbitLine(PLANET_DATA[planet].distance,0.01,0xffffff)
+                    this.orbits[planet] = new EllipticalOrbitLine(PLANET_DATA[planet].semiMajorAxis, PLANET_DATA[planet].eccentricity,0.01,0xffffff)
                     this.orbits[planet].position = {x: 0, y: 0, z: 0}
                     this.scene.add(this.orbits[planet].mesh)
                 }
