@@ -31,6 +31,7 @@ export interface PlanetData {
     eccentricity?: number,
     inclinationOfOrbitToEcliptic?:number
     inclinationOfEquatorToOrbit?:number
+    orbitalPeriod?:number
 }
 
 export const PLANET_DATA = {
@@ -47,7 +48,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 0.3871,
         eccentricity: 0.206,
         inclinationOfOrbitToEcliptic:degToRad( 7.0),
-        inclinationOfEquatorToOrbit:degToRad( 0)
+        inclinationOfEquatorToOrbit:degToRad( 0),
+        orbitalPeriod: 0.2408
     },
     [Planet.Venus]:{
         color: 0xc0c0c0,
@@ -56,7 +58,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 0.7233,
         eccentricity: 0.007,
         inclinationOfOrbitToEcliptic:degToRad( 3.39),
-        inclinationOfEquatorToOrbit:degToRad( 177.3)
+        inclinationOfEquatorToOrbit:degToRad( 177.3),
+        orbitalPeriod: 0.6152
     },
     [Planet.Earth]:{
         color: 0x0000FF,
@@ -65,7 +68,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 1,
         eccentricity: 0.017,
         inclinationOfOrbitToEcliptic:degToRad( 0),
-        inclinationOfEquatorToOrbit:degToRad( 23.4)
+        inclinationOfEquatorToOrbit:degToRad( 23.4),
+        orbitalPeriod:1
     },
     [Planet.Mars]:{
         color: 0xFF0000,
@@ -74,7 +78,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 1.5273,
         eccentricity: 0.093,
         inclinationOfOrbitToEcliptic:degToRad( 1.85),
-        inclinationOfEquatorToOrbit:degToRad( 25.2)
+        inclinationOfEquatorToOrbit:degToRad( 25.2),
+        orbitalPeriod:1.8809
     },
     [Planet.Jupiter]:{
         color: 0xFFD700,
@@ -83,7 +88,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 5.2028,
         eccentricity: 0.048,
         inclinationOfOrbitToEcliptic:degToRad( 1.31),
-        inclinationOfEquatorToOrbit:degToRad( 3.1)
+        inclinationOfEquatorToOrbit:degToRad( 3.1),
+        orbitalPeriod:11.862
     },
     [Planet.Saturn]:{
         color: 0xFFA500,
@@ -92,7 +98,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 9.5388,
         eccentricity: 0.056,
         inclinationOfOrbitToEcliptic:degToRad( 2.49),
-        inclinationOfEquatorToOrbit:degToRad( 26.7)
+        inclinationOfEquatorToOrbit:degToRad( 26.7),
+        orbitalPeriod:29.458
     },
     [Planet.Uranus]:{
         color: 0x00FFFF,
@@ -101,7 +108,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 19.1914,
         eccentricity: 0.046,
         inclinationOfOrbitToEcliptic:degToRad( 0.77),
-        inclinationOfEquatorToOrbit:degToRad( 97.9)
+        inclinationOfEquatorToOrbit:degToRad( 97.9),
+        orbitalPeriod:84.01
     },
     [Planet.Neptune]:{
         color: 0x0000FF,
@@ -110,7 +118,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 30.0611,
         eccentricity: 0.010,
         inclinationOfOrbitToEcliptic:degToRad( 1.77),
-        inclinationOfEquatorToOrbit:degToRad( 29.6)
+        inclinationOfEquatorToOrbit:degToRad( 29.6),
+        orbitalPeriod:164.79
     },
     [Planet.Pluto]:{
         color: 0x0000FF,
@@ -119,7 +128,8 @@ export const PLANET_DATA = {
         semiMajorAxis: 39.5294,
         eccentricity: 0.248,
         inclinationOfOrbitToEcliptic:degToRad( 17.15),
-        inclinationOfEquatorToOrbit:degToRad( 122.5)
+        inclinationOfEquatorToOrbit:degToRad( 122.5),
+        orbitalPeriod:248.54
     }
 } as {[key in Planet]: PlanetData}
 
