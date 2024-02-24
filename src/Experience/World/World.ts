@@ -28,28 +28,27 @@ export default class World
         this.resources.on('ready', () =>
         {
             // Setup
-            this.floor = new Floor()
             this.environment = new Environment()
 
 
             this.planets.venus = new PlaceholderBox(0xc0c0c0)
-            this.planets.venus.position = {x: 1, y: 0.6, z: 0}
+            this.planets.venus.position = {x: 1, y: 0, z: 0}
             this.planets.venus.mesh.scale.set(0.2, 0.2, 0.2)
 
             this.orbits.venus = new OrbitLine(1,0.01)
-            this.orbits.venus.position = {x: 0, y: 0.6, z: 0}
+            this.orbits.venus.position = {x: 0, y: 0, z: 0}
 
             console.log(SCALED_PLANET_DATA)
 
             for(let planet in SCALED_PLANET_DATA){
                 
                 this.planets[planet] = new PlaceholderBox(PLANET_DATA[planet].color)
-                this.planets[planet].position = {x: PLANET_DATA[planet].distance, y: 0.6, z: 0}
+                this.planets[planet].position = {x: PLANET_DATA[planet].distance, y: 0, z: 0}
                 this.planets[planet].mesh.scale.set(SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius)
 
                 if(planet != "sun"){
                     this.orbits[planet] = new OrbitLine(PLANET_DATA[planet].distance,0.01,0xffffff)
-                    this.orbits[planet].position = {x: 0, y: 0.6, z: 0}
+                    this.orbits[planet].position = {x: 0, y: 0, z: 0}
                     this.scene.add(this.orbits[planet].mesh)
                 }
                 this.scene.add(this.planets[planet].mesh)
