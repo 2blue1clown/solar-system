@@ -1,12 +1,8 @@
 import * as THREE from 'three'
 import Experience from '../Experience.ts'
-import Resources from '../Utils/Resources.ts'
+import Resources, { Textures } from '../Utils/Resources.ts'
 
-interface Textures {
-    color: THREE.Texture
-    normal: THREE.Texture
 
-}
 
 export default class Floor
 {

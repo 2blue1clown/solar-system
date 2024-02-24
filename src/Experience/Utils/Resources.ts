@@ -3,6 +3,12 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import EventEmitter from './EventEmitter.js'
 import { Source } from '../sources.js'
 
+
+export interface Textures {
+    color: THREE.Texture
+    normal: THREE.Texture
+}
+
 export default class Resources extends EventEmitter
 {
 
