@@ -44,13 +44,17 @@ export default class World
             for(let planet in SCALED_PLANET_DATA){
                 
                 this.planets[planet] = new PlaceholderBox(PLANET_DATA[planet].color)
-                this.planets[planet].position = {x: PLANET_DATA[planet].distance, y: 0, z: 0}
                 this.planets[planet].mesh.scale.set(SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius)
-
+                
                 if(planet != "sun"){
-                    // this.orbits[planet] = new OrbitLine(PLANET_DATA[planet].distance,0.01,0xffffff)
-                    this.orbits[planet] = new EllipticalOrbitLine(PLANET_DATA[planet].semiMajorAxis, PLANET_DATA[planet].eccentricity,0.01,0xffffff)
-                    this.orbits[planet].position = {x: 0, y: 0, z: 0}
+                    this.orbits[planet] = new EllipticalOrbitLine(
+                        PLANET_DATA[planet].semiMajorAxis, 
+                        PLANET_DATA[planet].eccentricity,
+                        PLANET_DATA[planet].inclinationOfOrbitToEcliptic,
+                        0xffffff)
+
+                    this.planets[planet].position = {x: this.orbits[planet].getXPosition(0.25), y:this.orbits[planet].getYPosition(0.25), z: 0}
+
                     this.scene.add(this.orbits[planet].mesh)
                 }
                 this.scene.add(this.planets[planet].mesh)

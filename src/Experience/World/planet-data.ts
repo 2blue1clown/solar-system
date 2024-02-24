@@ -28,7 +28,9 @@ export interface PlanetData {
      */
     radius: number,
     semiMajorAxis?: number,
-    eccentricity?: number
+    eccentricity?: number,
+    inclinationOfOrbitToEcliptic?:number
+    inclinationOfEquatorToOrbit?:number
 }
 
 export const PLANET_DATA = {
@@ -43,64 +45,81 @@ export const PLANET_DATA = {
         distance: 0.39,
         radius: 2439,
         semiMajorAxis: 0.3871,
-        eccentricity: 0.206
-
+        eccentricity: 0.206,
+        inclinationOfOrbitToEcliptic:degToRad( 7.0),
+        inclinationOfEquatorToOrbit:degToRad( 0)
     },
     [Planet.Venus]:{
         color: 0xc0c0c0,
         distance: 0.72,
         radius: 6052,
         semiMajorAxis: 0.7233,
-        eccentricity: 0.007
+        eccentricity: 0.007,
+        inclinationOfOrbitToEcliptic:degToRad( 3.39),
+        inclinationOfEquatorToOrbit:degToRad( 177.3)
     },
     [Planet.Earth]:{
         color: 0x0000FF,
         distance: 1,
         radius: 6387,
         semiMajorAxis: 1,
-        eccentricity: 0.017
+        eccentricity: 0.017,
+        inclinationOfOrbitToEcliptic:degToRad( 0),
+        inclinationOfEquatorToOrbit:degToRad( 23.4)
     },
     [Planet.Mars]:{
         color: 0xFF0000,
         distance: 1.5,
         radius: 3393,
         semiMajorAxis: 1.5273,
-        eccentricity: 0.093
+        eccentricity: 0.093,
+        inclinationOfOrbitToEcliptic:degToRad( 1.85),
+        inclinationOfEquatorToOrbit:degToRad( 25.2)
     },
     [Planet.Jupiter]:{
         color: 0xFFD700,
         distance: 5.2,
         radius: 71398,
         semiMajorAxis: 5.2028,
-        eccentricity: 0.048
+        eccentricity: 0.048,
+        inclinationOfOrbitToEcliptic:degToRad( 1.31),
+        inclinationOfEquatorToOrbit:degToRad( 3.1)
     },
     [Planet.Saturn]:{
         color: 0xFFA500,
         distance: 9.5,
         radius: 60000,
         semiMajorAxis: 9.5388,
-        eccentricity: 0.056
+        eccentricity: 0.056,
+        inclinationOfOrbitToEcliptic:degToRad( 2.49),
+        inclinationOfEquatorToOrbit:degToRad( 26.7)
     },
     [Planet.Uranus]:{
         color: 0x00FFFF,
         distance: 19.2,
         radius: 25559,
         semiMajorAxis: 19.1914,
-        eccentricity: 0.046
+        eccentricity: 0.046,
+        inclinationOfOrbitToEcliptic:degToRad( 0.77),
+        inclinationOfEquatorToOrbit:degToRad( 97.9)
     },
     [Planet.Neptune]:{
         color: 0x0000FF,
         distance: 30.1,
         radius: 24800,
         semiMajorAxis: 30.0611,
-        eccentricity: 0.010
+        eccentricity: 0.010,
+        inclinationOfOrbitToEcliptic:degToRad( 1.77),
+        inclinationOfEquatorToOrbit:degToRad( 29.6)
     },
     [Planet.Pluto]:{
         color: 0x0000FF,
         distance: 39.5,
         radius: 1140,
         semiMajorAxis: 39.5294,
-        eccentricity: 0.248
+        eccentricity: 0.248,
+        inclinationOfOrbitToEcliptic:degToRad( 17.15),
+        inclinationOfEquatorToOrbit:degToRad( 122.5)
     }
 }
 
@@ -113,3 +132,7 @@ export const SCALED_PLANET_DATA = Object.keys(PLANET_DATA).reduce((acc, planet) 
     }
     return acc
 }, {} as {[key in Planet]: PlanetData})
+
+function degToRad(degrees:number){
+    return degrees * (Math.PI/180)
+}   

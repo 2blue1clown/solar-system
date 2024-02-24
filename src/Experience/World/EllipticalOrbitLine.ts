@@ -13,6 +13,9 @@ export default class EllipticalOrbitLine{
 
     semiMajorAxis:number
     eccentricity:number
+    inclination:number
+
+    curve:EllipseCurve
 
     get semiMinorAxis(){
         return this.semiMajorAxis * Math.sqrt(1 - this.eccentricity**2)
@@ -22,18 +25,29 @@ export default class EllipticalOrbitLine{
         return 2 * Math.sqrt(this.semiMajorAxis**2 - this.semiMinorAxis**2);
     }
 
+    getXPosition(parameter:number){
+        return this.curve.getPoint(parameter).x
+    }
+    getYPosition(parameter:number){
+        return this.curve.getPoint(parameter).y
+    }
+
+    // getZPosition(parameter:number){
+    //     return this.curve.getPoint(parameter).z
+    // }
+
     color:number
     width:number
 
 
-    constructor(semiMajorAxis:number, eccentricity:number,width:number = 0.01, color:number = 0xffffff){
+    constructor(semiMajorAxis:number, eccentricity:number,inclination:number, color:number = 0xffffff){
         
 
         this.semiMajorAxis = semiMajorAxis
         this.eccentricity = eccentricity
+        this.inclination = inclination
 
         this.color = color
-        this.width = width
 
         this.experience = new Experience()
         this.scene = this.experience.scene
@@ -44,11 +58,10 @@ export default class EllipticalOrbitLine{
 
     setGeometry(){
 
-        // I want to place the ellipse at one of the foci points
-        // 1. Find the distance between the foci points
 
-        const curve =  new EllipseCurve(this.fociDistance/2, 0, this.semiMajorAxis, this.semiMinorAxis, 0, 2 * Math.PI, false, 0)
-        const points = curve.getPoints( 100 );
+        this.curve =  new EllipseCurve(this.fociDistance/2, 0, this.semiMajorAxis, this.semiMinorAxis, 0, 2 * Math.PI, false,)
+        
+        const points = this.curve.getPoints( 100 );
         this.geometry = new BufferGeometry().setFromPoints( points );
     }
 
@@ -65,7 +78,7 @@ export default class EllipticalOrbitLine{
 
     setMesh(){
         this.mesh = new Mesh(this.geometry, this.material)
-        this.mesh.rotation.x = - Math.PI * 0.5
+        // this.mesh.rotation.x = - Math.PI * 0.5
     }
 
 
