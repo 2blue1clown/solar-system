@@ -1,5 +1,5 @@
 
-import { BoxGeometry, Mesh, MeshStandardMaterial } from "three"
+import { BoxGeometry, Material, Mesh, MeshStandardMaterial } from "three"
 import Experience from "../Experience"
 import Resources, { Textures } from "../Utils/Resources"
 
@@ -9,13 +9,15 @@ export default class PlaceholderBox {
     resources: Resources
     geometry: THREE.BoxGeometry
     textures: Textures
-    material: THREE.MeshStandardMaterial
+    material: Material
     mesh: THREE.Mesh
-    constructor()
+    color:number
+    constructor(color: number = 0xffff00)
     {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
+        this.color = color
 
         this.setGeometry()
         this.setTextures()
@@ -23,9 +25,15 @@ export default class PlaceholderBox {
         this.setMesh()
     }
 
+    set position(position: {x:number, y:number, z:number})
+    {
+        this.mesh.position.set(position.x, position.y, position.z)
+    }
+
     setGeometry()
     {
         this.geometry = new BoxGeometry(1, 1, 1)
+    
     }
 
     setTextures()
@@ -47,7 +55,7 @@ export default class PlaceholderBox {
     setMaterial()
     {
         this.material = new MeshStandardMaterial({
-            color: 0x00ff00,
+            color: this.color,
             // map: this.textures.color,
             // normalMap: this.textures.normal
         })
@@ -56,5 +64,6 @@ export default class PlaceholderBox {
     setMesh()
     {
         this.mesh = new Mesh(this.geometry, this.material)
+        this.mesh.castShadow = true
     }
 }
