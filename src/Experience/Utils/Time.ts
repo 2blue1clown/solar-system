@@ -6,6 +6,7 @@ export default class Time extends EventEmitter
     current: number
     elapsed: number
     delta: number
+    elapsedSeconds: number
     
     constructor()
     {
@@ -29,6 +30,7 @@ export default class Time extends EventEmitter
         this.delta = currentTime - this.current
         this.current = currentTime
         this.elapsed = this.current - this.start
+        this.elapsedSeconds = this.elapsed / 1000
 
         this.trigger('tick')
 

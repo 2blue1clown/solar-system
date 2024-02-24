@@ -47,14 +47,15 @@ export default class World
                 
                 if(planet != "sun"){
                     
-                    const scaledSemiMajorAxis = Math.abs(Math.log(SCALED_PLANET_DATA[planet].semiMajorAxis))
-
-                    console.log(planet,scaledSemiMajorAxis)
-
+                    const scaledSemiMajorAxis = Math.log(SCALED_PLANET_DATA[planet].semiMajorAxis) + 1
                     const orbit = new EllipticalOrbitLine(
                         scaledSemiMajorAxis, 
                         PLANET_DATA[planet].eccentricity,
                         0xffffff)
+                    // const orbit = new EllipticalOrbitLine(
+                    //     PLANET_DATA[planet].semiMajorAxis, 
+                    //     PLANET_DATA[planet].eccentricity,
+                    //     0xffffff)
                     
                     this.orbitLines[planet] = orbit
                     box.position = {x: orbit.getXPosition(0), y:orbit.getYPosition(0), z: 0}
@@ -74,17 +75,16 @@ export default class World
 
     update()
     {
-        const elapsedTime = this.time.elapsed;
+        const elapsedTime = this.time.elapsedSeconds /36.5 ;
         for(let planet in this.planets){
             if(planet == "sun") continue
             const boxMesh = this.planets[planet].children[0] as THREE.Mesh
             const orbit = this.orbitLines[planet]
             // I want one year to be 365 seconds
             const period = SCALED_PLANET_DATA[planet].orbitalPeriod
-            console.log(elapsedTime%period)
             boxMesh.position.set(
-                orbit.getXPosition(elapsedTime%period),
-                orbit.getYPosition(elapsedTime%period),
+                orbit.getXPosition(elapsedTime/period%1),
+                orbit.getYPosition(elapsedTime/period%1),
                 0)
         }
 
