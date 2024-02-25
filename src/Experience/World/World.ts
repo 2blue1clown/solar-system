@@ -8,6 +8,7 @@ import { PLANET_DATA, SCALED_PLANET_DATA } from './planet-data.ts'
 import { Planet } from './planet-data.ts'
 import EllipticalOrbitLine from './EllipticalOrbitLine.ts'
 import Time from '../Utils/Time.ts'
+import Sun from './Sun.ts'
 
 export default class World
 {
@@ -40,6 +41,14 @@ export default class World
 
             for(let planet in SCALED_PLANET_DATA){
             
+                if(planet == "sun"){
+                    const sun = new Sun()
+                    sun.mesh.scale.set(SCALED_PLANET_DATA.sun.radius, SCALED_PLANET_DATA.sun.radius, SCALED_PLANET_DATA.sun.radius)
+                    solarSystem.add(sun.mesh)
+
+                    continue
+                }
+
                 this.planets[planet] = new Group()
                 const box = new PlaceholderBox(PLANET_DATA[planet].color)
                 box.mesh.scale.set(SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius)
@@ -54,10 +63,6 @@ export default class World
                         PLANET_DATA[planet].eccentricity,
                         startingPoint,
                         0xffffff)
-                    // const orbit = new EllipticalOrbitLine(
-                    //     PLANET_DATA[planet].semiMajorAxis, 
-                    //     PLANET_DATA[planet].eccentricity,
-                    //     0xffffff)
                     
                     this.orbitLines[planet] = orbit
                     box.position = {x: orbit.getXPosition(startingPoint), y:orbit.getYPosition(startingPoint), z: 0}
