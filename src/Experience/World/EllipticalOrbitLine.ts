@@ -27,26 +27,25 @@ export default class EllipticalOrbitLine{
     }
 
     getXPosition(parameter:number){
-        return this.curve.getPoint(parameter).x
+        return this.curve.getPoint((parameter+this.startingPoint)%1).x
     }
     getYPosition(parameter:number){
-        return this.curve.getPoint(parameter).y
+        return this.curve.getPoint((parameter+this.startingPoint)%1).y
     }
 
-    // getZPosition(parameter:number){
-    //     return this.curve.getPoint(parameter).z
-    // }
 
     color:number
     width:number
+    startingPoint:number
 
 
-    constructor(semiMajorAxis:number, eccentricity:number, color:number = 0xffffff){
+    constructor(semiMajorAxis:number, eccentricity:number,startingPoint=0, color:number = 0xffffff){
         
         this.semiMajorAxis = semiMajorAxis
         this.eccentricity = eccentricity
         
         this.color = color
+        this.startingPoint = startingPoint
         
         this.experience = new Experience()
         this.scene = this.experience.scene

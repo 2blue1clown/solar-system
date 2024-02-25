@@ -47,10 +47,12 @@ export default class World
                 
                 if(planet != "sun"){
                     
+                    const startingPoint = Math.random()
                     const scaledSemiMajorAxis = Math.log(SCALED_PLANET_DATA[planet].semiMajorAxis *10)
                     const orbit = new EllipticalOrbitLine(
                         scaledSemiMajorAxis, 
                         PLANET_DATA[planet].eccentricity,
+                        startingPoint,
                         0xffffff)
                     // const orbit = new EllipticalOrbitLine(
                     //     PLANET_DATA[planet].semiMajorAxis, 
@@ -58,7 +60,7 @@ export default class World
                     //     0xffffff)
                     
                     this.orbitLines[planet] = orbit
-                    box.position = {x: orbit.getXPosition(0), y:orbit.getYPosition(0), z: 0}
+                    box.position = {x: orbit.getXPosition(startingPoint), y:orbit.getYPosition(startingPoint), z: 0}
                     this.planets[planet].add(orbit.mesh)
                     this.planets[planet].rotateY(SCALED_PLANET_DATA[planet].inclinationOfOrbitToEcliptic)
                 }
