@@ -64,6 +64,5 @@ export default class PlaceholderBox {
     setMesh()
     {
         this.mesh = new Mesh(this.geometry, this.material)
-        this.mesh.castShadow = true
     }
 }
