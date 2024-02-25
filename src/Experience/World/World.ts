@@ -47,7 +47,7 @@ export default class World
                 
                 if(planet != "sun"){
                     
-                    const scaledSemiMajorAxis = Math.log(SCALED_PLANET_DATA[planet].semiMajorAxis) + 1
+                    const scaledSemiMajorAxis = Math.log(SCALED_PLANET_DATA[planet].semiMajorAxis *10)
                     const orbit = new EllipticalOrbitLine(
                         scaledSemiMajorAxis, 
                         PLANET_DATA[planet].eccentricity,

@@ -42,7 +42,7 @@ export const PLANET_DATA = {
     },
 
     [Planet.Mercury]:{
-        color: 0xCC5500,
+        color: 0xc0c0c0,
         distance: 0.39,
         radius: 2439,
         semiMajorAxis: 0.3871,
@@ -52,7 +52,7 @@ export const PLANET_DATA = {
         orbitalPeriod: 0.2408
     },
     [Planet.Venus]:{
-        color: 0xc0c0c0,
+        color: 0xCC5500,
         distance: 0.72,
         radius: 6052,
         semiMajorAxis: 0.7233,
