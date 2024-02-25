@@ -8,12 +8,18 @@ html,
 body
 {
     overflow: hidden;
+    background-color: #211d20;
+    color:whitesmoke
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.text-content {
+    overflow-y: scroll;
+    height:20vh;
+    padding-left: 10px;
 }
+
+p {
+    max-width: 100ch;
+}
+
+
