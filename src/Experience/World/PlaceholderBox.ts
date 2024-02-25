@@ -1,5 +1,5 @@
 
-import { BoxGeometry, Material, Mesh, MeshStandardMaterial } from "three"
+import { BoxGeometry, IcosahedronGeometry, Material, Mesh, MeshStandardMaterial } from "three"
 import Experience from "../Experience"
 import Resources, { Textures } from "../Utils/Resources"
 
@@ -7,7 +7,7 @@ export default class PlaceholderBox {
     experience: Experience
     scene: THREE.Scene
     resources: Resources
-    geometry: THREE.BoxGeometry
+    geometry: THREE.IcosahedronGeometry
     textures: Textures
     material: Material
     mesh: THREE.Mesh
@@ -32,7 +32,7 @@ export default class PlaceholderBox {
 
     setGeometry()
     {
-        this.geometry = new BoxGeometry(1, 1, 1)
+        this.geometry = new IcosahedronGeometry(1, 1)
     
     }
 
@@ -56,6 +56,7 @@ export default class PlaceholderBox {
     {
         this.material = new MeshStandardMaterial({
             color: this.color,
+            flatShading: true,
             // map: this.textures.color,
             // normalMap: this.textures.normal
         })

@@ -15,8 +15,8 @@ export default class Sun {
         this.experience = new Experience()
         this.scene = this.experience.scene
 
-        this.light = new PointLight(0xffffff, 10, 800)
-        this.light.castShadow = true
+        this.light = new PointLight(0xffffff, 5, 800)
+        this.light.castShadow = false
         this.light.position.set(0, 0, 0)
 
         this.scene.add(this.light)
@@ -28,7 +28,7 @@ export default class Sun {
 
     setGeometry()
     {
-        this.geometry = new IcosahedronGeometry(1, 1)
+        this.geometry = new IcosahedronGeometry(1, 2)
     }
 
     setMaterial()
@@ -37,8 +37,7 @@ export default class Sun {
             color: 0xffff00,
             emissive: 0xffff00,
             emissiveIntensity: 1,
-            blending: 0,
-            wireframe:false
+            wireframe:false,
         })
 
     }
