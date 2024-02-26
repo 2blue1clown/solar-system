@@ -1,7 +1,8 @@
 
-import { BoxGeometry, IcosahedronGeometry, Material, Mesh, MeshStandardMaterial } from "three"
+import { BoxGeometry, BufferAttribute, Color, IcosahedronGeometry, Material, Mesh, MeshStandardMaterial } from "three"
 import Experience from "../Experience"
 import Resources, { Textures } from "../Utils/Resources"
+import { ColorInfo } from "./planet-data"
 
 export default class PlaceholderBox {
     experience: Experience
@@ -11,16 +12,16 @@ export default class PlaceholderBox {
     textures: Textures
     material: Material
     mesh: THREE.Mesh
-    color:number
-    constructor(color: number = 0xffff00)
+    colorWeights: ColorInfo[]
+
+    constructor(colorWeights:ColorInfo[])
     {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
-        this.color = color
+        this.colorWeights = colorWeights
 
         this.setGeometry()
-        this.setTextures()
         this.setMaterial()
         this.setMesh()
     }
@@ -32,38 +33,48 @@ export default class PlaceholderBox {
 
     setGeometry()
     {
+        
+        
+
         this.geometry = new IcosahedronGeometry(1, 1)
+        const count = this.geometry.attributes.position.count
+        this.geometry.setAttribute('color', new BufferAttribute(new Float32Array(count * 3), 3))
+        const aColor = this.geometry.attributes.color
+        
+        for (let i = 0; i < (count / 3); i++) {
+            const color = new Color(this.chooseColor(this.colorWeights))
+            aColor.setXYZ(i * 3 + 0, color.r, color.g, color.b);
+            aColor.setXYZ(i * 3 + 1, color.r, color.g, color.b);
+            aColor.setXYZ(i * 3 + 2, color.r, color.g, color.b);
+          }
     
     }
 
-    setTextures()
-    {
-        // this.textures = {} as Textures
-
-        // this.textures.color = this.resources.items.placeholderBoxColorTexture as THREE.Texture
-        // this.textures.color.colorSpace = THREE.SRGBColorSpace
-        // this.textures.color.repeat.set(1, 1)
-        // this.textures.color.wrapS = THREE.RepeatWrapping
-        // this.textures.color.wrapT = THREE.RepeatWrapping
-
-        // this.textures.normal = this.resources.items.placeholderBoxNormalTexture as THREE.Texture
-        // this.textures.normal.repeat.set(1, 1)
-        // this.textures.normal.wrapS = THREE.RepeatWrapping
-        // this.textures.normal.wrapT = THREE.RepeatWrapping
+    chooseColor(colorInfo: ColorInfo[]) {
+        let totalWeight = colorInfo.reduce((total, color) => total + color.weight, 0);
+        let randomNum = Math.random() * totalWeight;
+        let weightSum = 0;
+    
+        for (const color of colorInfo) {
+            weightSum += color.weight;
+            if (randomNum <= weightSum) {
+                return color.hex;
+            }
+        }
+        return colorInfo[colorInfo.length - 1].hex; // fallback to the last color if no color is chosen (should not happen)
     }
 
     setMaterial()
     {
         this.material = new MeshStandardMaterial({
-            color: this.color,
             flatShading: true,
-            // map: this.textures.color,
-            // normalMap: this.textures.normal
+            vertexColors: true,
         })
     }
 
     setMesh()
     {
         this.mesh = new Mesh(this.geometry, this.material)
+    
     }
 }

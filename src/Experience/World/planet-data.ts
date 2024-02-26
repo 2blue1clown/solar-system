@@ -13,12 +13,14 @@ export enum Planet {
     Pluto = 'pluto',
 }
 
+export interface ColorInfo  {hex: number
+    weight: number}
 
 export interface PlanetData {
     /**
      * Color in hex
      */
-    color: number,
+    colorWeights: ColorInfo[],
     /**
      * Distance from the sun in AU
      */
@@ -36,13 +38,12 @@ export interface PlanetData {
 
 export const PLANET_DATA = {
     [Planet.Sun]:{
-        color: 0xFFFF00,
         distance: 0,
         radius: 696000
     },
 
     [Planet.Mercury]:{
-        color: 0xc0c0c0,
+        colorWeights: [{hex: 0x808080, weight: 1}],
         distance: 0.39,
         radius: 2439,
         semiMajorAxis: 0.3871,
@@ -52,7 +53,7 @@ export const PLANET_DATA = {
         orbitalPeriod: 0.2408
     },
     [Planet.Venus]:{
-        color: 0xCC5500,
+        colorWeights: [{hex:0xCC5500,weight:1}],
         distance: 0.72,
         radius: 6052,
         semiMajorAxis: 0.7233,
@@ -62,7 +63,7 @@ export const PLANET_DATA = {
         orbitalPeriod: 0.6152
     },
     [Planet.Earth]:{
-        color: 0x0000FF,
+        colorWeights: [{hex:0x0000FF,weight:0.85},{hex:0x00FF00,weight:0.15}],
         distance: 1,
         radius: 6387,
         semiMajorAxis: 1,
@@ -72,7 +73,7 @@ export const PLANET_DATA = {
         orbitalPeriod:1
     },
     [Planet.Mars]:{
-        color: 0xFF0000,
+        colorWeights:[{hex:0xFF0000,weight:1}],
         distance: 1.5,
         radius: 3393,
         semiMajorAxis: 1.5273,
@@ -82,7 +83,7 @@ export const PLANET_DATA = {
         orbitalPeriod:1.8809
     },
     [Planet.Jupiter]:{
-        color: 0xFFD700,
+        colorWeights: [{hex: 0xFFA500, weight: 1}],
         distance: 5.2,
         radius: 71398,
         semiMajorAxis: 5.2028,
@@ -92,7 +93,7 @@ export const PLANET_DATA = {
         orbitalPeriod:11.862
     },
     [Planet.Saturn]:{
-        color: 0xFFA500,
+        colorWeights: [{hex: 0xFFFF00, weight: 1}],
         distance: 9.5,
         radius: 60000,
         semiMajorAxis: 9.5388,
@@ -102,7 +103,7 @@ export const PLANET_DATA = {
         orbitalPeriod:29.458
     },
     [Planet.Uranus]:{
-        color: 0x00FFFF,
+        colorWeights: [{hex: 0x00FFFF, weight: 1}],
         distance: 19.2,
         radius: 25559,
         semiMajorAxis: 19.1914,
@@ -112,7 +113,7 @@ export const PLANET_DATA = {
         orbitalPeriod:84.01
     },
     [Planet.Neptune]:{
-        color: 0x0000FF,
+        colorWeights: [{hex: 0x0000FF, weight: 1}],
         distance: 30.1,
         radius: 24800,
         semiMajorAxis: 30.0611,
@@ -122,7 +123,7 @@ export const PLANET_DATA = {
         orbitalPeriod:164.79
     },
     [Planet.Pluto]:{
-        color: 0x0000FF,
+        colorWeights: [{hex: 0x808080, weight: 1}],
         distance: 39.5,
         radius: 1140,
         semiMajorAxis: 39.5294,
