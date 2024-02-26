@@ -1,5 +1,3 @@
-# Three.js Project Starter
-This code has taken from the Three.js journey course and converted into Typescript. This will remain a work in progress and will develop as I comeplete more projects
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
