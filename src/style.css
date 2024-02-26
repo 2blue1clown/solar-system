@@ -22,4 +22,8 @@ p {
     max-width: 100ch;
 }
 
+li{
+    list-style-type: disc;
+    list-style: inside;
+}
 
