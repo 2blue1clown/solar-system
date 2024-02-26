@@ -54,6 +54,7 @@ export default class World
                 const box = new PlaceholderBox(PLANET_DATA[planet].colorWeights,(PLANET_DATA[planet].dwarf)?0:1)
                 box.mesh.scale.set(SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius)
                 this.planets[planet].add(box.mesh)
+                box.mesh.rotateY(SCALED_PLANET_DATA[planet].inclinationOfEquatorToOrbit)
                 
                 if(planet != "sun"){
                     
@@ -94,6 +95,7 @@ export default class World
                 orbit.getXPosition(elapsedTime/period%1),
                 orbit.getYPosition(elapsedTime/period%1),
                 0)
+            boxMesh.rotateZ((1/(SCALED_PLANET_DATA[planet].rotationPeriod))*0.1)   
         }
 
     }
