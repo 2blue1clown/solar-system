@@ -1,4 +1,4 @@
-import { IcosahedronGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, PointLight, Scene, SphereGeometry } from "three";
+import { Color, IcosahedronGeometry, Mesh, MeshBasicMaterial, MeshStandardMaterial, PointLight, Scene, SphereGeometry } from "three";
 import Experience from "../Experience";
 
 export default class Sun {
@@ -9,6 +9,7 @@ export default class Sun {
     material: THREE.MeshStandardMaterial
     mesh: THREE.Mesh
     light: THREE.PointLight
+    color = new Color(0xf28322)
 
     constructor()
     {
@@ -34,8 +35,8 @@ export default class Sun {
     setMaterial()
     {
         this.material = new MeshStandardMaterial({
-            color: 0xffff00,
-            emissive: 0xffff00,
+            color: this.color,
+            emissive: this.color,
             emissiveIntensity: 1,
             wireframe:false,
         })
