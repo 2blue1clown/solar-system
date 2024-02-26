@@ -13,13 +13,15 @@ export default class PlaceholderBox {
     material: Material
     mesh: THREE.Mesh
     colorWeights: ColorInfo[]
+    detail: number
 
-    constructor(colorWeights:ColorInfo[])
+    constructor(colorWeights:ColorInfo[],detail:number = 1)
     {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.colorWeights = colorWeights
+        this.detail = detail
 
         this.setGeometry()
         this.setMaterial()
@@ -36,7 +38,7 @@ export default class PlaceholderBox {
         
         
 
-        this.geometry = new IcosahedronGeometry(1, 1)
+        this.geometry = new IcosahedronGeometry(1, this.detail)
         const count = this.geometry.attributes.position.count
         this.geometry.setAttribute('color', new BufferAttribute(new Float32Array(count * 3), 3))
         const aColor = this.geometry.attributes.color

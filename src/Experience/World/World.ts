@@ -50,7 +50,8 @@ export default class World
                 }
 
                 this.planets[planet] = new Group()
-                const box = new PlaceholderBox(PLANET_DATA[planet].colorWeights)
+                
+                const box = new PlaceholderBox(PLANET_DATA[planet].colorWeights,(PLANET_DATA[planet].dwarf)?0:1)
                 box.mesh.scale.set(SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius, SCALED_PLANET_DATA[planet].radius)
                 this.planets[planet].add(box.mesh)
                 
