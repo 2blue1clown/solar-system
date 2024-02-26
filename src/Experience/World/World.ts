@@ -62,7 +62,7 @@ export default class World
                 this.planets[planet].add(line.mesh)
 
                 box.mesh.rotateY(SCALED_PLANET_DATA[planet].inclinationOfEquatorToOrbit)
-                line.mesh.rotateX(SCALED_PLANET_DATA[planet].inclinationOfEquatorToOrbit)
+                line.mesh.rotateY(SCALED_PLANET_DATA[planet].inclinationOfEquatorToOrbit)
                 
                 if(planet != "sun"){
                     
